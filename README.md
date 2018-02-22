@@ -1,24 +1,13 @@
-# README
+# Odin Flight Booker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app is for finding and booking one-way flights.
 
-Things you may want to cover:
+You select your "From" and "To" airports, and what date you want to fly on.
+Then you search for available flights and choose one from the options.
+After picking your flight, you enter in the information for all your passengers.
+Finally, you enter your billing information and book your flight.
 
-* Ruby version
+Happy journeys!
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This is a practice app from following the courses at:
+[The Odin Project - Flight Booker (Building Adv. Forms)](https://www.theodinproject.com/courses/ruby-on-rails/lessons/building-advanced-forms)
