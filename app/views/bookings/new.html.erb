@@ -1,0 +1,18 @@
+<h1>Finalize your booking</h1>
+
+<%= form_for(@booking, url: bookings_path) do |f| %>
+	<ul>
+		<%= f.hidden_field :flight_id, value: @flight_id %>
+		<%= f.hidden_field :number_of_passengers, value: @number_of_passengers %>
+		<%= f.fields_for :passengers do |passenger_form| %>
+			<li>
+				<%= passenger_form.label :name %>
+				<%= passenger_form.text_field :name %>
+
+				<%= passenger_form.label :email %>
+				<%= passenger_form.text_field :email %>
+			</li>
+		<% end %>
+	</ul>
+	<%= f.submit "Finalize booking" %>
+<% end %>	

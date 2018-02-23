@@ -29,10 +29,10 @@
 				<td>Arrives</td>
 			</tr>
 		</thead>
-		<%= form_tag("/flights", method: "get") do %>
+		<%= form_tag("/bookings/new", method: "get") do %>
 			<% @matching_flights.each do |flight| %>
 				<tr>
-					<td><%= radio_button_tag(:booked_flight_id, flight.id) %></td>
+					<td><%= radio_button_tag(:flight_id, flight.id) %></td>
 					<td><%= flight.starting_airport.airport_code %></td>
 					<td><%= flight.finishing_airport.airport_code %></td>
 					<td><%= flight.departure_time_formatted %></td>
@@ -40,7 +40,7 @@
 				</tr>
 			<% end %>
 		</table>
-		<%= hidden_field_tag(:num_of_passengers, @num_of_passengers) %>	
+		<%= hidden_field_tag(:number_of_passengers, @num_of_passengers) %>	
 		<%= submit_tag("Book your flight") %>
 	<% end %>
 <% end %>
