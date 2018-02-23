@@ -7,7 +7,16 @@ class BookingsController < ApplicationController
   end
 
   def create
-  	@booking = Booking.create!(booking_params)
+  	@booking = Booking.new(booking_params)
+  	if(@booking.save)
+  		render 'show'
+  	else
+  		redirect_to root_url
+  	end
+  end
+
+  def show
+  	@booking = Booking.find(params[:id])
   end
 
   private
