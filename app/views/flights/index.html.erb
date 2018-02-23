@@ -11,7 +11,7 @@
 	<%= select_tag(:number_of_passengers, options_for_select([[1,1],[2,2],[3,3],[4,4]])) %>
 
 	<%= label_tag :flight_date, "Date" %>
-	<%= select_tag(:flight_date, options_from_collection_for_select(@flight_times, 'departure_time', :departure_time_formatted)) %>
+	<%= select_tag(:flight_date, options_from_collection_for_select(@flight_times, 'departure_time', :flight_date_formatted)) %>
 
 	<%= submit_tag("Search") %>
 <% end %>
@@ -22,19 +22,25 @@
 	<table>
 		<thead>
 			<tr>
+				<td></td>
 				<td>From</td>
 				<td>To</td>
 				<td>Leaves</td>
 				<td>Arrives</td>
 			</tr>
 		</thead>
-		<% @matching_flights.each do |flight| %>
-			<tr>
-				<td><%= flight.starting_airport.airport_code %></td>
-				<td><%= flight.finishing_airport.airport_code %></td>
-				<td><%= flight.departure_time %></td>
-				<td><%= flight.arrival_time %></td>
-			</tr>
-		<% end %>
-	</table>	
+		<%= form_tag("/flights", method: "get") do %>
+			<% @matching_flights.each do |flight| %>
+				<tr>
+					<td><%= radio_button_tag(:booked_flight_id, flight.id) %></td>
+					<td><%= flight.starting_airport.airport_code %></td>
+					<td><%= flight.finishing_airport.airport_code %></td>
+					<td><%= flight.departure_time_formatted %></td>
+					<td><%= flight.arrival_time_formatted %></td>
+				</tr>
+			<% end %>
+		</table>
+		<%= hidden_field_tag(:num_of_passengers, @num_of_passengers) %>	
+		<%= submit_tag("Book your flight") %>
+	<% end %>
 <% end %>
