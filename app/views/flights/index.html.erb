@@ -1,43 +1,40 @@
 <h1>Search for a flight</h1>
 
 <%= form_tag("/flights", method: "get") do %>
-	<%= label_tag :departure_airport, "Departs from" %>
+	<%= label_tag :departure_airport, "From" %>
 	<%= select_tag(:departure_airport, options_from_collection_for_select(@airports, :id, :airport_code)) %>
 	
-	<%= label_tag :arrival_airport, "Arrives at" %>
+	<%= label_tag :arrival_airport, "To" %>
 	<%= select_tag(:arrival_airport, options_from_collection_for_select(@airports, :id, :airport_code)) %>
 
 	<%= label_tag :number_of_passengers, "Number of passengers" %>
 	<%= select_tag(:number_of_passengers, options_for_select([[1,1],[2,2],[3,3],[4,4]])) %>
 
 	<%= label_tag :flight_date, "Date" %>
-	<%= select_tag(:flight_date, options_from_collection_for_select(@flights, 'departure_time', :departure_time_formatted)) %>
+	<%= select_tag(:flight_date, options_from_collection_for_select(@flight_times, 'departure_time', :departure_time_formatted)) %>
 
 	<%= submit_tag("Search") %>
 <% end %>
 
+<% if @matching_flights.any? %> 
+	<h1>Matching Flights</h1>
 
-<!-- 
-<h1>All Flights</h1>
-
-<table>
-	<thead>
-		<tr>
-			<td>From</td>
-			<td>To</td>
-			<td>Leaves</td>
-			<td>Arrives</td>
-		</tr>
-	</thead>
-	<% # @flights.each do |flight| %>
-		<tr>
-			<td><%#= flight.starting_airport.airport_code %></td>
-			<td><%#= flight.finishing_airport.airport_code %></td>
-			<td><%#= flight.departure_time %></td>
-			<td><%#= flight.arrival_time %></td>
-		</tr>
-	<% # end %>
-</table>
-
- -->
-	
+	<table>
+		<thead>
+			<tr>
+				<td>From</td>
+				<td>To</td>
+				<td>Leaves</td>
+				<td>Arrives</td>
+			</tr>
+		</thead>
+		<% @matching_flights.each do |flight| %>
+			<tr>
+				<td><%= flight.starting_airport.airport_code %></td>
+				<td><%= flight.finishing_airport.airport_code %></td>
+				<td><%= flight.departure_time %></td>
+				<td><%= flight.arrival_time %></td>
+			</tr>
+		<% end %>
+	</table>	
+<% end %>
