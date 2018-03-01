@@ -9,6 +9,9 @@ class BookingsController < ApplicationController
   def create
   	@booking = Booking.new(booking_params)
   	if(@booking.save)
+      @booking.passengers.each do |passenger|
+        PassengerMailer.thank_you_email(passenger).deliver_later
+      end
   		render 'show'
   	else
   		redirect_to root_url
